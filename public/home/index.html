@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Count Requests</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+
+
+
+<div class="container">
+
+    <h2>Count requests informations</h2>
+
+    <p>The list down below describes the count information of the current port:</p>
+  
+    <blockquote>
+      <dl id="count-info">
+        <dt>Current count : </dt>
+        <dd id="current-count"></dd>
+        <dt>Total count : </dt>
+        <dd id="total-count"></dd>
+      </dl>     
+    </blockquote>
+
+
+  <form action="/reset_count" method="post">
+
+    <h2>Reset Count</h2>
+
+    <div class="checkbox">
+      <label><input type="checkbox" name="current_count"> Current count</label>
+    </div>
+
+    <div class="checkbox">
+      <label><input type="checkbox" name="total_count"> Total count</label>
+    </div>
+
+    <button type="submit" class="btn btn-default">Submit</button>
+
+  </form>
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>
