@@ -19,7 +19,7 @@ const pathHandler = require('../path'); // gives path to the public directory an
  *  
  *    
  */ 
-const setResponseValue = (err, fileContent, port, res) => {
+const setCountInfoResponseValue = (err, fileContent, port, res) => {
     if(err) {
         countJSON = {}; 
     } else {
@@ -34,6 +34,7 @@ const setResponseValue = (err, fileContent, port, res) => {
     }
 }
 
+
 /*
  *
  * Send a json with the count information of the choosen port in count_info.json, 
@@ -42,18 +43,30 @@ const setResponseValue = (err, fileContent, port, res) => {
  * @param app, the express variable 
  * @param port, the current port
  * 
+ * returns a response with the parse json in it 
+ * 
  */
 function getRequestCountInfo(app, port) {
 
     app.get('/count_info', (req, res) => {
 
+        /*
+         * 
+         * Defines the callback function which will parse count_info.json, 
+         * after fs.readFile is called on it. 
+         * 
+         * @param err, eventual error returned by fs.readFile 
+         * @param fileContent, content of count_info.json
+         * 
+         */
         const afterRead = (err, fileContent) => {
-            setResponseValue(err, fileContent, port, res); 
+            setCountInfoResponseValue(err, fileContent, port, res); 
         }
     
         fs.readFile(pathHandler.DBCountInfoPath(), afterRead); 
     });
 }
+
 
 /*
  *
@@ -63,18 +76,73 @@ function getRequestCountInfo(app, port) {
  * @param app, the express variable 
  * @param port, the choosen port
  * 
+ * returns a response with the parse json in it
+ * 
  */
 function getReqCountInfoPerPort(app, port) {
     app.get('/count_info/:id', (req, res) => {
-         
+
+        /*
+         * 
+         * Defines the callback function which will parse count_info.json, 
+         * after fs.readFile is called on it. 
+         * 
+         * @param err, eventual error returned by fs.readFile 
+         * @param fileContent, content of count_info.json
+         * 
+         */
         afterRead = (err, fileContent) => {
             const portId = req.params.id;
-            setResponseValue(err, fileContent, portId, res); 
+            setCountInfoResponseValue(err, fileContent, portId, res); 
         }
 
         fs.readFile(pathHandler.DBCountInfoPath(), afterRead);
     });
 }
+
+
+/*
+ * 
+ * Send a json with the list of ports that's been openned, 
+ * when a get http request is sent from the client onto '/ports-list'.
+ * 
+ * @param app, the express variable
+ * 
+ * returns a response with the parse json in it
+ *  
+ */ 
+function getPortsList(app) {
+    app.get('/ports_list', (req, res) => {
+
+        /*
+         * 
+         * Defines the callback function which will parse count_info.json, 
+         * after fs.readFile is called on it. 
+         * 
+         * @param err, eventual error returned by fs.readFile 
+         * @param fileContent, content of count_info.json
+         * 
+         */ 
+        const parsePortsList = (err, fileContent) => { 
+            let portsList = []; 
+
+            if(err) {
+                portsListJSON = {}; 
+            } else {
+                const portsListJSON = JSON.parse(fileContent); 
+
+                for(const port in portsListJSON) {
+                    portsList.push(port); 
+                }
+
+                res.json(portsListJSON); 
+            }
+        }
+
+        fs.readFile(pathHandler.DBCountInfoPath(), parsePortsList); 
+    });
+}
+
 
 /*
  * 
@@ -89,7 +157,9 @@ function run(app, port) {
    
     getRequestCountInfo(app, port);  
     getReqCountInfoPerPort(app, port)
+    getPortsList(app); 
 }
+
 
 /*
  * Exports only 'run' to be used by './app.js'.
