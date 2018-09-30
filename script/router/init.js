@@ -10,7 +10,11 @@ const chalk = require('chalk'); // to colorize the initialization message of
 let express = require('express'); 
 
 /*
- *  Initialize express.
+ * 
+ * Initialize express.
+ * 
+ * @param app, the express variable which will be initialized
+ * 
  */ 
 function initExpress(app) {
 
@@ -25,7 +29,11 @@ function initExpress(app) {
 
 /*
  * Init the port with the choosen port by the user (stored in the variable 'port'),
- * and console log a message, to inform that the initialization has begun. 
+ * and console log a message, to inform that the initialization has begun.
+ * 
+ * @param app, the express variable which will be initialized
+ * @param port, the current port
+ *  
  */
 function initPort(app, port) {
 

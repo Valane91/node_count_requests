@@ -1,4 +1,13 @@
-const countJSONUpdater = require('../JSON_handler'); 
+/*
+ * 
+ * Handle the port listenner by the 'express' variable. 
+ * 
+ * Script used by 'router.js'
+ * 
+ */ 
+
+
+const countJSONUpdater = require('../JSON_handler'); // to update port_count_info.js everytime there's a request
 
 /*
  *  Listen to all the requests from the client side, 
@@ -17,6 +26,10 @@ function listenRequests(app, port, count) {
  * 
  * Entry point to instanciate the post requests in the initialized express 
  * input as 'app'. 
+ * 
+ * @param app, the express variable 
+ * @param port, the current port
+ * @param count, the current requests count
  * 
  */ 
 function run(app, port, count) {

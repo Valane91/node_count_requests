@@ -14,6 +14,10 @@ const pathHandler = require('../path'); // gives path to the public directory an
  * Reset the count information of the choosen port in count_info.json 
  * when the client call a post http request on '/reset_count'.   
  * 
+ * @param app, the express variable 
+ * @param port, the current port
+ * @param count, the current requests count
+ * 
  */
 function postRequestResetCount(app, port, count) {
 
@@ -36,6 +40,10 @@ function postRequestResetCount(app, port, count) {
  * 
  * Entry point to instanciate the post requests in the initialized express 
  * input as 'app'. 
+ * 
+ * @param app, the express variable 
+ * @param port, the current port
+ * @param count, the current requests count
  * 
  */ 
 function run(app, port, count) {
