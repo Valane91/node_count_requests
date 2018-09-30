@@ -15,22 +15,30 @@
 
 <div class="container">
 
-    <h2>Count requests informations</h2>
+  <h2>Count requests informations</h2>
 
-    <p>The list down below describes the count information of the current port:</p>
-  
-    <blockquote>
-      <dl id="count-info">
-        <dt>Current count : </dt>
-        <dd id="current-count"></dd>
-        <dt>Total count : </dt>
-        <dd id="total-count"></dd>
-      </dl>     
-    </blockquote>
+  <p>The list down below describes the count information of the current port:</p>
+
+  <blockquote>
+    <dl id="count-info">
+      <dt>Current count : </dt>
+      <dd id="current-count"></dd>
+      <dt>Total count : </dt>
+      <dd id="total-count"></dd>
+    </dl>     
+  </blockquote>
+
+ 
+  <div class="dropdown">
+    <form action="/select_port_info" method="post">
+      <button class="btn btn-primary dropdown-toggle" type="data" data-toggle="dropdown">Choose a port</button>
+      <ul class="dropdown-menu" id="ports-list">
+      </ul>
+    </form>
+  </div>
 
 
   <form action="/reset_count" method="post">
-
     <h2>Reset Count</h2>
 
     <div class="checkbox">
@@ -42,8 +50,8 @@
     </div>
 
     <button type="submit" class="btn btn-default">Submit</button>
-
   </form>
+
 </div>
 
 <script src="main.js"></script>
